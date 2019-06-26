@@ -69,9 +69,9 @@ export class VehicleStore {
       }
 
       this.setVehicles = vehicles => {
-        socket.send({ unsub: getEnabledThingIds(vehicles) });
+        socket.send({ unsub: getEnabledThingIds(this.vehicles) });
         this.vehicles = vehicles;
-        socket.send({ sub: getEnabledThingIds(vehicles) });
+        socket.send({ sub: getEnabledThingIds(this.vehicles) });
       }
     }
   }
