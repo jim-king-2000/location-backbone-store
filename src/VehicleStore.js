@@ -5,10 +5,13 @@ import { appId, authorization } from './account';
 
 const tsdbClient = new TsdbClient();
 
-function onConnect(vehicles, socket) {
+function getEnabledThingIds(vehicles) {
   const vehiclesEnabled = vehicles.filter(v => v.enabled);
-  const thingIds = vehiclesEnabled.map(v => v.thingId);
-  setTimeout(() => socket.send({ sub: thingIds }), 1000);
+  return vehiclesEnabled.map(v => v.thingId);
+}
+
+function onConnect(vehicles, socket) {
+  setTimeout(() => socket.send({ sub: getEnabledThingIds(vehicles) }), 1000);
   console.log('Socket.io connected.');
 }
 
@@ -63,6 +66,12 @@ export class VehicleStore {
       this.pickVehicle = (v, checked) => {
         v.enabled = checked;
         socket.send(checked ? { sub: [v.thingId] } : { unsub: [v.thingId] });
+      }
+
+      this.setVehicles = vehicles => {
+        socket.send({ unsub: getEnabledThingIds(vehicles) });
+        this.vehicles = vehicles;
+        socket.send({ sub: getEnabledThingIds(vehicles) });
       }
     }
   }
