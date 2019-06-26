@@ -1,6 +1,6 @@
 import { observable, autorun } from 'mobx';
 import io from 'socket.io-client';
-import { TsdbClient } from 'externalSDK';
+import { TsdbClient } from 'location-backbone-sdk';
 import { appId, authorization } from './account';
 
 const tsdbClient = new TsdbClient();
