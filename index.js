@@ -1,1 +1,1 @@
-export * from './src/VehicleStore';
+export * from './src/PositionStore';

@@ -41,7 +41,7 @@ async function getPositions(vehicles) {
   );
 }
 
-export class VehicleStore {
+export class PositionStore {
   constructor(vehicles, url) {
     this.vehicles = vehicles;
 
