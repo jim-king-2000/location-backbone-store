@@ -2,6 +2,7 @@ import { observable } from 'mobx';
 import moment from 'moment';
 import { promisedComputed } from 'computed-async-mobx';
 import { TsdbClient } from 'location-backbone-sdk';
+import { trackPlayerStore } from './TrackPlayerStore';
 import { appId, authorization } from './account';
 
 const tsdbClient = new TsdbClient();
@@ -38,6 +39,9 @@ export class TrackStore {
   tracks = promisedComputed([], async () => getTrackSplit(
     this.vehicles,
     this.timeRange));
+
+  trackPlayerStore = promisedComputed([],
+    async () => new trackPlayerStore(this.tracks.get()));
 
   @observable vehicles = [];
   @observable timeRange = {
