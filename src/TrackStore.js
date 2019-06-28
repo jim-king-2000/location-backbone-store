@@ -41,7 +41,7 @@ export class TrackStore {
     this.timeRange));
 
   trackPlayerStore = promisedComputed([],
-    async () => new trackPlayerStore(this.tracks.get()));
+    async () => new TrackPlayerStore(this.tracks.get()));
 
   @observable vehicles = [];
   @observable timeRange = {
