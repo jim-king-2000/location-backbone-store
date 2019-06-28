@@ -2,7 +2,7 @@ import { observable } from 'mobx';
 import moment from 'moment';
 import { promisedComputed } from 'computed-async-mobx';
 import { TsdbClient } from 'location-backbone-sdk';
-import { trackPlayerStore } from './TrackPlayerStore';
+import { TrackPlayerStore } from './TrackPlayerStore';
 import { appId, authorization } from './account';
 
 const tsdbClient = new TsdbClient();
