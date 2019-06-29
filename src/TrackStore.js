@@ -27,8 +27,12 @@ async function getTrackSplit(vehicles, timeRange) {
 }
 
 export class TrackStore {
-  constructor(vehicles) {
+  constructor(vehicles, properties) {
     this.vehicles = vehicles;
+    if (Array.isArray(properties)) {
+      properties.forEach(p => this[p.name] = promisedComputed([],
+        async () => new p.type(this.tracks.get())))
+    }
   }
 
   set = (vehicles, timeRange) => {
@@ -39,9 +43,6 @@ export class TrackStore {
   tracks = promisedComputed([], async () => getTrackSplit(
     this.vehicles,
     this.timeRange));
-
-  trackPlayerStore = promisedComputed([],
-    async () => new TrackPlayerStore(this.tracks.get()));
 
   @observable vehicles = [];
   @observable timeRange = {
