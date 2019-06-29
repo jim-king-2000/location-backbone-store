@@ -2,17 +2,16 @@ import { observable } from 'mobx';
 import moment from 'moment';
 import { promisedComputed } from 'computed-async-mobx';
 import { TsdbClient } from 'location-backbone-sdk';
-import { TrackPlayerStore } from './TrackPlayerStore';
 import { appId, authorization } from './account';
 
 const tsdbClient = new TsdbClient();
 
+function toTimestamp(dateTime) {
+  return moment(`${dateTime.date}T${dateTime.time}:00+08:00`).valueOf();
+}
+
 async function getTrackSplit(vehicles, timeRange) {
   const vehiclesEnabled = vehicles.filter(v => v.enabled);
-  const startTime = timeRange.startTime;
-  const endTime = timeRange.endTime;
-  const start = `${startTime.date}T${startTime.time}:00+08:00`;
-  const end = `${endTime.date}T${endTime.time}:00+08:00`;
   return Promise.all(vehiclesEnabled.map(async v => ({
     thingId: v.thingId,
     name: v.name,
@@ -20,8 +19,8 @@ async function getTrackSplit(vehicles, timeRange) {
       appId,
       thingId: v.thingId,
       authorization,
-      start: moment(start).valueOf(),
-      end: moment(end).valueOf()
+      start: toTimestamp(timeRange.startTime),
+      end: toTimestamp(timeRange.endTime)
     })
   })));
 }
