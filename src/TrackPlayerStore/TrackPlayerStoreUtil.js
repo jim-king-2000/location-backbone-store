@@ -66,8 +66,8 @@ export function visualize(startTimestamp, range, splittedTrack) {
   }));
   return dataSegments.map(dataSegment => ({
     margin: percentize(
-      (dataSegment.start - startTimestamp) / sum),
+      (dataSegment.start - startTimestamp) / range),
     width: percentize(
-      (dataSegment.end - dataSegment.start) / sum)
+      (dataSegment.end - dataSegment.start) / range)
   }));
 }
