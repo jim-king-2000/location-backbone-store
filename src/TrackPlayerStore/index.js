@@ -34,7 +34,6 @@ export class TrackPlayerStore {
     const endTimestamp = this.playerTimeline.endTimestamp;
     const range = endTimestamp - startTimestamp;
     return this.tracks.map(t => {
-      if (!range || range < 0) return [];
       return {
         thingId: t.thingId,
         name: t.name,
