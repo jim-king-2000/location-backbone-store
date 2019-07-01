@@ -8,9 +8,10 @@ const tsdbClient = new TsdbClient();
 
 async function getTrackSplit(vehicles, timeRange) {
   const vehiclesEnabled = vehicles.filter(v => v.enabled);
-  return Promise.all(vehiclesEnabled.map(async v => ({
+  return Promise.all(vehiclesEnabled.map(async (v, i) => ({
     thingId: v.thingId,
     name: v.name,
+    colorIndex: i,
     splittedTrack: await tsdbClient.getTrackSplit({
       appId,
       thingId: v.thingId,
