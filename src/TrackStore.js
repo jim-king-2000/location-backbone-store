@@ -29,7 +29,8 @@ export class TrackStore {
   constructor(vehicles, properties) {
     this.vehicles = vehicles;
     if (Array.isArray(properties)) {
-      properties.forEach(p => this[p.name] = promisedComputed([],
+      properties.forEach(p => this[p.name] = promisedComputed(
+        new new p.type(),
         async () => new p.type(this.tracks.get(), this.timeRange)))
     }
   }
