@@ -3,6 +3,7 @@ import { calcPlayerTimestamp, calcPlayerIndex } from './TrackPlayerStoreUtil';
 
 export class TrackPlayerStore {
   constructor(tracks, timeRange) {
+    console.log(tracks)
     this.tracks = tracks.map(t => ({
       thingId: t.thingId,
       tracks: t.splittedTrack.flat()
