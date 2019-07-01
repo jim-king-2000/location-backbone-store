@@ -29,7 +29,9 @@ export class TrackPlayerStore {
 
   @computed
   get visualization() {
-    const range = playerTimeline.endTimestamp - playerTimeline.startTimestamp;
+    const startTimestamp = this.playerTimeline.startTimestamp;
+    const endTimestamp = this.playerTimeline.endTimestamp;
+    const range = endTimestamp - startTimestamp;
     return this.tracks.map(t => {
       if (!range || range < 0) return [];
       const dataSegments = t.splittedTrack.map(track => ({
@@ -38,7 +40,7 @@ export class TrackPlayerStore {
       }));
       return dataSegments.map(dataSegment => ({
         margin: percentize(
-          (dataSegment.start - playerTimeline.startTimestamp) / sum),
+          (dataSegment.start - startTimestamp) / sum),
         width: percentize(
           (dataSegment.end - dataSegment.start) / sum)
       }));
