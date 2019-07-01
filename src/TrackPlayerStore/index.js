@@ -1,5 +1,6 @@
 import { observable, computed, autorun } from 'mobx';
-import { calcPlayerTimestamp, calcPlayerIndex } from './TrackPlayerStoreUtil';
+import { calcPlayerTimestamp, calcPlayerIndex,
+  percentize } from './TrackPlayerStoreUtil';
 
 export class TrackPlayerStore {
   constructor(tracks, timeRange) {
@@ -24,6 +25,24 @@ export class TrackPlayerStore {
       ...t.tracks[t.index],
       colorIndex: t.colorIndex
     }));
+  }
+
+  @computed
+  get visualization() {
+    const range = playerTimeline.endTimestamp - playerTimeline.startTimestamp;
+    return this.tracks.map(t => {
+      if (!range || range < 0) return [];
+      const dataSegments = t.splittedTrack.map(track => ({
+        start: track[0].timestamp,
+        end: track[track.length - 1].timestamp
+      }));
+      return dataSegments.map(dataSegment => ({
+        margin: percentize(
+          (dataSegment.start - playerTimeline.startTimestamp) / sum),
+        width: percentize(
+          (dataSegment.end - dataSegment.start) / sum)
+      }));
+    });
   }
 
   @observable tracks = [];
