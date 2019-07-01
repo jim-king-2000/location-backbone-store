@@ -1,14 +1,10 @@
 import { observable } from 'mobx';
-import moment from 'moment';
 import { promisedComputed } from 'computed-async-mobx';
 import { TsdbClient } from 'location-backbone-sdk';
 import { appId, authorization } from './account';
+import { toTimestamp } from './common/utils';
 
 const tsdbClient = new TsdbClient();
-
-function toTimestamp(dateTime) {
-  return moment(`${dateTime.date}T${dateTime.time}:00+08:00`).valueOf();
-}
 
 async function getTrackSplit(vehicles, timeRange) {
   const vehiclesEnabled = vehicles.filter(v => v.enabled);
