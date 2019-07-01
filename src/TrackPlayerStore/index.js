@@ -6,7 +6,8 @@ export class TrackPlayerStore {
     this.tracks = tracks.map(t => ({
       thingId: t.thingId,
       colorIndex: t.colorIndex,
-      tracks: t.splittedTrack.flat()
+      tracks: t.splittedTrack.flat(),
+      splittedTrack: t.splittedTrack
     }));
     this.timeRange = timeRange;
 
