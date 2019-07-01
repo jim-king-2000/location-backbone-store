@@ -2,7 +2,7 @@ import { observable } from 'mobx';
 import { promisedComputed } from 'computed-async-mobx';
 import { TsdbClient } from 'location-backbone-sdk';
 import { appId, authorization } from './account';
-import { toTimestamp } from './common/utils';
+import { toTimestamp, today } from './common/utils';
 
 const tsdbClient = new TsdbClient();
 
@@ -43,11 +43,11 @@ export class TrackStore {
   @observable vehicles = [];
   @observable timeRange = {
     startTime: {
-      date: moment().format('YYYY-MM-DD'),
+      date: today(),
       time: '00:00'
     },
     endTime: {
-      date: moment().format('YYYY-MM-DD'),
+      date: today(),
       time: '00:00'
     }
   };
