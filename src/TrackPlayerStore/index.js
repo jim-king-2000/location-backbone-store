@@ -1,6 +1,6 @@
 import { observable, computed, autorun } from 'mobx';
 import { calcPlayerTimestamp, calcPlayerIndex,
-  percentize } from './TrackPlayerStoreUtil';
+  visualize } from './TrackPlayerStoreUtil';
 
 export class TrackPlayerStore {
   constructor(tracks, timeRange) {
@@ -34,16 +34,15 @@ export class TrackPlayerStore {
     const range = endTimestamp - startTimestamp;
     return this.tracks.map(t => {
       if (!range || range < 0) return [];
-      const dataSegments = t.splittedTrack.map(track => ({
-        start: track[0].timestamp,
-        end: track[track.length - 1].timestamp
-      }));
-      return dataSegments.map(dataSegment => ({
-        margin: percentize(
-          (dataSegment.start - startTimestamp) / sum),
-        width: percentize(
-          (dataSegment.end - dataSegment.start) / sum)
-      }));
+      return {
+        thingId: t.thingId,
+        name: t.name,
+        visualData: visualize(
+          startTimestamp,
+          range,
+          t.splittedTrack
+        )
+      };
     });
   }
 

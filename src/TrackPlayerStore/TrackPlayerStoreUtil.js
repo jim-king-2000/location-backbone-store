@@ -54,6 +54,20 @@ export function calcPlayerIndex(tracks, timestamp) {
   ));
 }
 
-export function percentize(value) {
+function percentize(value) {
   return Math.round(value * 10000) / 100 + '%';
+}
+
+export function visualize(startTimestamp, range, splittedTrack) {
+  if (!range || range < 0) return [];
+  const dataSegments = splittedTrack.map(track => ({
+    start: track[0].timestamp,
+    end: track[track.length - 1].timestamp
+  }));
+  return dataSegments.map(dataSegment => ({
+    margin: percentize(
+      (dataSegment.start - startTimestamp) / sum),
+    width: percentize(
+      (dataSegment.end - dataSegment.start) / sum)
+  }));
 }
