@@ -29,14 +29,19 @@ export function onMessage(data, index, positions) {
 
 export async function getPositions(vehicles) {
   return Promise.all(
-    vehicles.map(async (v, i) => ({
-      ...v,
-      colorIndex: i,
-      ...await tsdbClient.getLastPosition({
-        appId,
-        thingId: v.thingId,
-        authorization })
-    }))
+    vehicles.map(async (v, i) => (
+      v.enabled ? {
+        ...v,
+        colorIndex: i,
+        ...await tsdbClient.getLastPosition({
+          appId,
+          thingId: v.thingId,
+          authorization })
+      } : {
+        ...v,
+        colorIndex: i
+      })
+    )
   );
 }
 
