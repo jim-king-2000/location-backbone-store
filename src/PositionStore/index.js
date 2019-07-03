@@ -8,8 +8,8 @@ export class PositionStore {
     this.vehicles = vehicles;
 
     autorun(async () => {
-      // const checkedVehicles = this.vehicles.filter(v => v.enabled);
-      const positions = await getPositions(this.vehicles);
+      const checkedVehicles = this.vehicles.filter(v => v.enabled);
+      const positions = await getPositions(checkedVehicles);
       this.positionIndex = new Map(positions.map((p, i) => [p.thingId, i]));
       calcOnline(positions);
       this.positions = positions;
