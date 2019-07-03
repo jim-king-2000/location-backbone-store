@@ -1,5 +1,5 @@
 import { TsdbClient } from 'location-backbone-sdk';
-import { appId, authorization } from './account';
+import { appId, authorization } from '../account';
 
 const tsdbClient = new TsdbClient();
 
