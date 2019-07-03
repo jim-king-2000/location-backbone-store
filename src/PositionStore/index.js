@@ -16,6 +16,7 @@ export class PositionStore {
     });
 
     if (typeof window !== 'undefined') {
+      setInterval(() => calcOnline(this.positions), 5000);
       const socket = io(
         url || 'https://locationbackbone.top',
         { transports: [ 'websocket' ] });
