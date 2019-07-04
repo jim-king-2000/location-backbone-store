@@ -47,3 +47,7 @@ function isOnline(prevTimestamp) {
 export function calcOnline(positions) {
   positions.forEach(p => p.isOnline = isOnline(p.timestamp));
 }
+
+export function refreshSelectedVehicle(selectedVehicle, positions) {
+  return positions.find(e => e.thingId === selectedVehicle.thingId);
+}

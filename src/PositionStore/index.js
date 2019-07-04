@@ -1,7 +1,7 @@
 import { observable, autorun } from 'mobx';
 import io from 'socket.io-client';
 import { getEnabledThingIds, onConnect, onMessage,
-  getPositions, calcOnline } from './PositionStoreUtil';
+  getPositions, calcOnline, refreshSelectedVehicle } from './PositionStoreUtil';
 
 export class PositionStore {
   constructor(vehicles, url) {
@@ -30,12 +30,18 @@ export class PositionStore {
       this.pickVehicle = (v, checked) => {
         v.enabled = checked;
         socket.send(checked ? { sub: [v.thingId] } : { unsub: [v.thingId] });
+        this.selectedVehicle = refreshSelectedVehicle(
+          this.selectedVehicle,
+          this.positions);
       }
 
       this.setVehicles = vehicles => {
         socket.send({ unsub: getEnabledThingIds(this.vehicles) });
         this.vehicles = vehicles;
         socket.send({ sub: getEnabledThingIds(this.vehicles) });
+        this.selectedVehicle = refreshSelectedVehicle(
+          this.selectedVehicle,
+          this.positions);
       }
     }
   }
