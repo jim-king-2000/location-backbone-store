@@ -18,12 +18,12 @@ export function onMessage(data, index, positions) {
   const i = index.get(data.thingId);
   if (i === undefined) return;
   data.data.forEach(d => {
-    positions[i] = {
+    Object.assign(positions[i], {
       ...positions[i],
       ...d,
       ...d.location,
       ...d.sensors
-    };
+    });
   });
 }
 
