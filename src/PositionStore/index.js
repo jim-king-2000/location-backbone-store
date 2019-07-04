@@ -28,11 +28,13 @@ export class PositionStore {
           this.positions));
 
       this.pickVehicle = (v, checked) => {
+        this.selectedVehicle = undefined;
         v.enabled = checked;
         socket.send(checked ? { sub: [v.thingId] } : { unsub: [v.thingId] });
       }
 
       this.setVehicles = vehicles => {
+        this.selectedVehicle = undefined;
         socket.send({ unsub: getEnabledThingIds(this.vehicles) });
         this.vehicles = vehicles;
         socket.send({ sub: getEnabledThingIds(this.vehicles) });
@@ -42,4 +44,5 @@ export class PositionStore {
 
   @observable vehicles = [];
   @observable positions = [];
+  @observable selectedVehicle;
 }
