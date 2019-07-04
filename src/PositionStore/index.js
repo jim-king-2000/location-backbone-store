@@ -12,6 +12,9 @@ export class PositionStore {
       const positions = await getPositions(checkedVehicles);
       this.positionIndex = new Map(positions.map((p, i) => [p.thingId, i]));
       calcOnline(positions);
+      this.selectedVehicle = refreshSelectedVehicle(
+        this.selectedVehicle,
+        positions);
       this.positions = positions;
     });
 
@@ -30,18 +33,12 @@ export class PositionStore {
       this.pickVehicle = (v, checked) => {
         v.enabled = checked;
         socket.send(checked ? { sub: [v.thingId] } : { unsub: [v.thingId] });
-        this.selectedVehicle = refreshSelectedVehicle(
-          this.selectedVehicle,
-          this.positions);
       }
 
       this.setVehicles = vehicles => {
         socket.send({ unsub: getEnabledThingIds(this.vehicles) });
         this.vehicles = vehicles;
         socket.send({ sub: getEnabledThingIds(this.vehicles) });
-        this.selectedVehicle = refreshSelectedVehicle(
-          this.selectedVehicle,
-          this.positions);
       }
     }
   }
