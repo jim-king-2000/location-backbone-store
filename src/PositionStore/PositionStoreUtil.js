@@ -49,5 +49,6 @@ export function calcOnline(positions) {
 }
 
 export function refreshSelectedVehicle(selectedVehicle, positions) {
-  return positions.find(e => e.thingId === selectedVehicle.thingId);
+  return selectedVehicle &&
+    positions.find(e => e.thingId === selectedVehicle.thingId);
 }
