@@ -49,4 +49,5 @@ export class TrackPlayerStore {
   @observable tracks = [];
   @observable timeRange = {};
   @observable playerTimeline = {};
+  @observable selectedVehicle;
 }
