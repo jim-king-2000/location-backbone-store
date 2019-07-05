@@ -1,6 +1,6 @@
 import { observable, computed, autorun } from 'mobx';
 import { calcPlayerTimestamp, calcPlayerIndex,
-  visualize } from './TrackPlayerStoreUtil';
+  visualize, refreshSelectedVehicle } from './TrackPlayerStoreUtil';
 
 export class TrackPlayerStore {
   constructor(tracks, timeRange) {
@@ -16,10 +16,10 @@ export class TrackPlayerStore {
     autorun(() => this.playerTimeline =
       calcPlayerTimestamp(this.tracks, this.timeRange));
     autorun(() => {
-      this.selectedVehicle = this.selectedVehicle &&
-        this.things.find(
-          t => t.thingId === this.selectedVehicle.thingId
-        );
+      this.selectedVehicle = refreshSelectedVehicle(
+        this.selectedVehicle,
+        this.things
+      );
     });
   }
 

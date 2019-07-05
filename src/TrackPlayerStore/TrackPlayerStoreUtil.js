@@ -71,3 +71,9 @@ export function visualize(startTimestamp, range, splittedTrack) {
       (dataSegment.end - dataSegment.start) / range)
   }));
 }
+
+export function refreshSelectedVehicle(selectedVehicle, things) {
+  if (!selectedVehicle) return undefined;
+
+  return things.find(t => t.thingId === selectedVehicle.thingId);
+}
