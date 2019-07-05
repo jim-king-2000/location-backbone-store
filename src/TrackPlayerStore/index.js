@@ -13,13 +13,17 @@ export class TrackPlayerStore {
     }));
     this.timeRange = timeRange;
 
-    autorun(() => {
-      this.playerTimeline = calcPlayerTimestamp(this.tracks, this.timeRange);
-      this.selectedVehicle = refreshSelectedVehicle(
-        this.selectedVehicle,
-        this.things
-      );
-    });
+    autorun(() =>
+      this.playerTimeline = calcPlayerTimestamp(this.tracks, this.timeRange)
+    );
+  }
+
+  @computed
+  get selectedVehicle() {
+    return refreshSelectedVehicle(
+      this.selectedThingId,
+      this.things
+    )
   }
 
   @computed
@@ -54,5 +58,5 @@ export class TrackPlayerStore {
   @observable tracks = [];
   @observable timeRange = {};
   @observable playerTimeline = {};
-  @observable selectedVehicle;
+  @observable selectedThingId;
 }

@@ -72,8 +72,6 @@ export function visualize(startTimestamp, range, splittedTrack) {
   }));
 }
 
-export function refreshSelectedVehicle(selectedVehicle, things) {
-  if (!selectedVehicle) return undefined;
-
-  return things.find(t => t.thingId === selectedVehicle.thingId);
+export function refreshSelectedVehicle(selectedThingId, things) {
+  return selectedThingId && things.find(t => t.thingId === selectedThingId);
 }
