@@ -12,10 +12,11 @@ export class PositionStore {
       const positions = await getPositions(checkedVehicles);
       this.positionIndex = new Map(positions.map((p, i) => [p.thingId, i]));
       calcOnline(positions);
+      this.positions = positions;
       this.selectedVehicle = refreshSelectedVehicle(
         this.selectedVehicle,
-        positions);
-      this.positions = positions;
+        this.positionIndex,
+        this.positions);
     });
 
     if (typeof window !== 'undefined') {
