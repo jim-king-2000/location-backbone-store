@@ -21,7 +21,7 @@ export class TrackPlayerStore {
         this.things
       );
       console.log(x);
-      this.selectedVehicle = x;
+      // this.selectedVehicle = x;
     });
   }
 
