@@ -13,15 +13,12 @@ export class TrackPlayerStore {
     }));
     this.timeRange = timeRange;
 
-    autorun(() => this.playerTimeline =
-      calcPlayerTimestamp(this.tracks, this.timeRange));
     autorun(() => {
-      const x = refreshSelectedVehicle(
+      this.playerTimeline = calcPlayerTimestamp(this.tracks, this.timeRange);
+      this.selectedVehicle = refreshSelectedVehicle(
         this.selectedVehicle,
         this.things
       );
-      console.log(x);
-      this.selectedVehicle = x;
     });
   }
 
