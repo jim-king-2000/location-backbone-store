@@ -49,10 +49,8 @@ export function calcOnline(positions) {
 }
 
 export function refreshSelectedVehicle(selectedThingId, index, positions) {
-  if (!selectedThingId) return undefined;
 
   const i = index.get(selectedThingId);
-  if (i === undefined) return undefined;
 
   return positions[i];
 }
