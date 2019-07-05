@@ -48,10 +48,10 @@ export function calcOnline(positions) {
   positions.forEach(p => p.isOnline = isOnline(p.timestamp));
 }
 
-export function refreshSelectedVehicle(selectedVehicle, index, positions) {
-  if (!selectedVehicle) return undefined;
+export function refreshSelectedVehicle(selectedThingId, index, positions) {
+  if (!selectedThingId) return undefined;
 
-  const i = index.get(selectedVehicle.thingId);
+  const i = index.get(selectedThingId);
   if (i === undefined) return undefined;
 
   return positions[i];
