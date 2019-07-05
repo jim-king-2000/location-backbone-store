@@ -15,6 +15,11 @@ export class TrackPlayerStore {
 
     autorun(() => this.playerTimeline =
       calcPlayerTimestamp(this.tracks, this.timeRange));
+    autorun(() => {
+      this.selectedVehicle = this.things.find(
+        t => t.thingId === this.selectedVehicle.thingId
+      );
+    });
   }
 
   @computed
