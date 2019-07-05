@@ -16,10 +16,12 @@ export class TrackPlayerStore {
     autorun(() => this.playerTimeline =
       calcPlayerTimestamp(this.tracks, this.timeRange));
     autorun(() => {
-      this.selectedVehicle = refreshSelectedVehicle(
+      const x = refreshSelectedVehicle(
         this.selectedVehicle,
         this.things
       );
+      console.log(x);
+      this.selectedVehicle = x;
     });
   }
 
