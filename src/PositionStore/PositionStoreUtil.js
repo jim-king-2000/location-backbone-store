@@ -41,7 +41,7 @@ export async function getPositions(vehicles) {
 }
 
 function isOnline(prevTimestamp) {
-  return Date.now() - prevTimestamp < 10000;
+  return Date.now() - prevTimestamp < 20000;
 }
 
 export function calcOnline(positions) {
