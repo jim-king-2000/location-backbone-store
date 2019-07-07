@@ -22,5 +22,8 @@
     "array.prototype.flat": "^1.2.1",
     "mobx": "^5.10.1",
     "socket.io-client": "^2.2.0"
+  },
+  "dependencies": {
+    "gcoord": "^0.2.3"
   }
 }
