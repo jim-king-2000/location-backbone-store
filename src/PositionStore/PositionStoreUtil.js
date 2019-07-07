@@ -1,4 +1,5 @@
 import { TsdbClient } from 'location-backbone-sdk';
+import { coordinateTransform } from '../common/coordinate';
 import { appId, authorization } from '../account';
 
 const tsdbClient = new TsdbClient();
@@ -21,7 +22,7 @@ export function onMessage(data, index, positions) {
     Object.assign(positions[i], {
       ...positions[i],
       ...d,
-      ...d.location,
+      ...coordinateTransform(d.location),
       ...d.sensors
     });
   });
