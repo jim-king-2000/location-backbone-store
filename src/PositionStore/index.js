@@ -1,5 +1,6 @@
 import { observable, autorun, computed } from 'mobx';
 import io from 'socket.io-client';
+import { coordinateTransform } from '../common/coordinate';
 import { getEnabledThingIds, onConnect, onMessage,
   getPositions, calcOnline, refreshSelectedVehicle } from './PositionStoreUtil';
 
@@ -12,6 +13,7 @@ export class PositionStore {
       const positions = await getPositions(checkedVehicles);
       this.positionIndex = new Map(positions.map((p, i) => [p.thingId, i]));
       calcOnline(positions);
+      positions.forEach(p => coordinateTransform(p));
       this.positions = positions;
     });
 
