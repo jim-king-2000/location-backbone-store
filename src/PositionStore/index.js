@@ -41,6 +41,7 @@ export class PositionStore {
       }
     }
   }
+  
   @computed
   get selectedVehicle() {
     return refreshSelectedVehicle(
