@@ -1,5 +1,5 @@
 import { observable, computed, autorun } from 'mobx';
-import flatShim from 'array.prototype.flat';
+import flatShim from 'array.prototype.flat/shim';
 import { calcPlayerTimestamp, calcPlayerIndex,
   visualize, refreshSelectedVehicle } from './TrackPlayerStoreUtil';
 
