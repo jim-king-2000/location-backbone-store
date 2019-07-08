@@ -1,6 +1,9 @@
 import { observable, computed, autorun } from 'mobx';
+import flatShim from 'array.prototype.flat';
 import { calcPlayerTimestamp, calcPlayerIndex,
   visualize, refreshSelectedVehicle } from './TrackPlayerStoreUtil';
+
+flatShim();
 
 export class TrackPlayerStore {
   constructor(tracks, timeRange) {
