@@ -62,4 +62,5 @@ export class TrackPlayerStore {
   @observable timeRange = {};
   @observable playerTimeline = {};
   @observable selectedThingId;
+  @observable tracingMode = false;
 }
