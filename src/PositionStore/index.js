@@ -53,5 +53,4 @@ export class PositionStore {
   @observable vehicles = [];
   @observable positions = [];
   @observable selectedThingId;
-  @observable tracingMode = false;
 }
