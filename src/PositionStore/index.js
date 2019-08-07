@@ -5,7 +5,10 @@ import { getEnabledThingIds, onConnect, onMessage,
   getPositions, calcOnline, refreshSelectedVehicle } from './PositionStoreUtil';
 
 export class PositionStore {
-  constructor(vehicles, url) {
+  constructor(vehicles, colorIndex, url) {
+    if (!colorIndex) {
+      vehicles.forEach((v, i) => v.colorIndex = i);
+    }
     this.vehicles = vehicles;
 
     autorun(async () => {
@@ -52,5 +55,6 @@ export class PositionStore {
 
   @observable vehicles = [];
   @observable positions = [];
+  @observable colorIndex;
   @observable selectedThingId;
 }
