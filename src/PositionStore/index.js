@@ -41,7 +41,8 @@ export class PositionStore {
         socket.send(checked ? { sub: [v.thingId] } : { unsub: [v.thingId] });
       }
 
-      this.setVehicles = vehicles => {
+      this.setVehicles = (vehicles, colorIndex) => {
+        this.colorIndex = colorIndex;
         socket.send({ unsub: getEnabledThingIds(this.vehicles) });
         this.vehicles = vehicles;
         socket.send({ sub: getEnabledThingIds(this.vehicles) });
