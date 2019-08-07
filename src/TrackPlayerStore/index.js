@@ -12,7 +12,7 @@ export class TrackPlayerStore {
       tracks: t.splittedTrack.flat(),
     }));
     this.timeRange = timeRange;
-console.log(this.tracks)
+
     autorun(() =>
       this.playerTimeline = calcPlayerTimestamp(this.tracks, this.timeRange)
     );
@@ -31,6 +31,7 @@ console.log(this.tracks)
     const tracks = calcPlayerIndex(
       this.tracks,
       this.playerTimeline.currentTimestamp);
+      console.log(tracks)
     return tracks.map(t => ({
       ...t.tracks[t.index],
       colorIndex: t.colorIndex
