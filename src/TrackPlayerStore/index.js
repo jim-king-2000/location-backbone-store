@@ -31,7 +31,6 @@ export class TrackPlayerStore {
     const tracks = calcPlayerIndex(
       this.tracks,
       this.playerTimeline.currentTimestamp);
-    console.log(tracks)
     return tracks.map(t => ({
       ...t.tracks[t.index],
       colorIndex: t.colorIndex
