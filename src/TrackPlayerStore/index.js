@@ -12,6 +12,7 @@ export class TrackPlayerStore {
       tracks: t.splittedTrack.flat(),
     }));
     this.timeRange = timeRange;
+    console.log(this.tracks)
 
     autorun(() =>
       this.playerTimeline = calcPlayerTimestamp(this.tracks, this.timeRange)
