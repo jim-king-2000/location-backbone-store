@@ -11,8 +11,11 @@ export class PositionStore {
 
     autorun(async () => {
       const checkedVehicles = this.vehicles.filter(v => v.enabled);
-      if (!colorIndex) {
+      if (!this.colorIndex) {
         checkedVehicles.forEach((v, i) => v.colorIndex = i);
+      } else {
+        checkedVehicles.forEach(
+          v => v.colorIndex = this.colorIndex.get(v.groupId));
       }
       const positions = await getPositions(checkedVehicles);
       this.positionIndex = new Map(positions.map((p, i) => [p.thingId, i]));
