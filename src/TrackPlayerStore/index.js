@@ -8,11 +8,8 @@ flatShim();
 export class TrackPlayerStore {
   constructor(tracks, timeRange) {
     this.tracks = tracks.map(t => ({
-      thingId: t.thingId,
-      name: t.name,
-      colorIndex: t.colorIndex,
+      ...t,
       tracks: t.splittedTrack.flat(),
-      splittedTrack: t.splittedTrack
     }));
     this.timeRange = timeRange;
 
