@@ -18,10 +18,10 @@ export class PositionStore {
           v => v.colorIndex = this.colorIndex.get(v.groupId));
       }
       const positions = await getPositions(checkedVehicles);
+      console.log(positions);
       this.positionIndex = new Map(positions.map((p, i) => [p.thingId, i]));
       calcOnline(positions);
       positions.forEach(p => coordinateTransform(p));
-      console.log(positions);
       this.positions = positions;
     });
 
