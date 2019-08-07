@@ -6,13 +6,14 @@ import { getEnabledThingIds, onConnect, onMessage,
 
 export class PositionStore {
   constructor(vehicles, colorIndex, url) {
-    if (!colorIndex) {
-      vehicles.forEach((v, i) => v.colorIndex = i);
-    }
+    this.colorIndex = colorIndex;
     this.vehicles = vehicles;
 
     autorun(async () => {
       const checkedVehicles = this.vehicles.filter(v => v.enabled);
+      if (!colorIndex) {
+        checkedVehicles.forEach((v, i) => v.colorIndex = i);
+      }
       const positions = await getPositions(checkedVehicles);
       this.positionIndex = new Map(positions.map((p, i) => [p.thingId, i]));
       calcOnline(positions);
