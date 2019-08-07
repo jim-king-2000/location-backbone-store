@@ -32,7 +32,6 @@ export async function getPositions(vehicles) {
   return Promise.all(
     vehicles.map(async (v, i) => ({
       ...v,
-      colorIndex: i,
       ...await tsdbClient.getLastPosition({
         appId,
         thingId: v.thingId,
