@@ -30,7 +30,7 @@ export function onMessage(data, index, positions) {
 
 export async function getPositions(vehicles) {
   return Promise.all(
-    vehicles.map(async (v, i) => ({
+    vehicles.map(async v => ({
       ...v,
       ...await tsdbClient.getLastPosition({
         appId,
