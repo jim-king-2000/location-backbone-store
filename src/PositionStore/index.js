@@ -17,7 +17,7 @@ export class PositionStore {
         checkedVehicles.forEach(
           v => v.colorIndex = this.colorIndex.get(v.groupId));
       }
-      console.log(checkedVehicles);
+      console.log(this.vehicles);
       const positions = await getPositions(checkedVehicles);
       this.positionIndex = new Map(positions.map((p, i) => [p.thingId, i]));
       calcOnline(positions);
