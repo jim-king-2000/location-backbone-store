@@ -11,7 +11,6 @@ export class PositionStore {
 
     autorun(async () => {
       const checkedVehicles = this.vehicles.filter(v => v.enabled);
-      console.log(checkedVehicles)
       if (!this.colorIndex) {
         checkedVehicles.forEach((v, i) => v.colorIndex = i);
       } else {
@@ -23,6 +22,7 @@ export class PositionStore {
       calcOnline(positions);
       positions.forEach(p => coordinateTransform(p));
       this.positions = positions;
+      console.log(positions)
     });
 
     if (typeof window !== 'undefined') {
