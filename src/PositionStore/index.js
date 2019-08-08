@@ -11,6 +11,7 @@ export class PositionStore {
 
     autorun(async () => {
       const checkedVehicles = this.vehicles.filter(v => v.enabled);
+      console.log(checkedVehicles)
       if (!this.colorIndex) {
         checkedVehicles.forEach((v, i) => v.colorIndex = i);
       } else {
