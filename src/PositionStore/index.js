@@ -48,6 +48,7 @@ export class PositionStore {
         socket.send({ unsub: getEnabledThingIds(this.vehicles) });
         this.vehicles = vehicles;
         socket.send({ sub: getEnabledThingIds(this.vehicles) });
+        console.log('setVehicles', vehicles)
       }
     }
   }
