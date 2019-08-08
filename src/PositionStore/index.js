@@ -63,6 +63,6 @@ export class PositionStore {
 
   @observable vehicles = [];
   @observable positions = [];
-  @observable colorIndex;
+  // @observable colorIndex;
   @observable selectedThingId;
 }
