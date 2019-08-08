@@ -17,13 +17,11 @@ export class PositionStore {
         checkedVehicles.forEach(
           v => v.colorIndex = this.colorIndex.get(v.groupId));
       }
-      console.log('checkedVehicles', checkedVehicles)
       const positions = await getPositions(checkedVehicles);
       this.positionIndex = new Map(positions.map((p, i) => [p.thingId, i]));
       calcOnline(positions);
       positions.forEach(p => coordinateTransform(p));
       this.positions = positions;
-      console.log('positions', positions)
     });
 
     if (typeof window !== 'undefined') {
@@ -44,7 +42,6 @@ export class PositionStore {
       }
 
       this.setVehicles = (vehicles, colorIndex) => {
-        console.log('setVehicles', vehicles)
         this.colorIndex = colorIndex;
         socket.send({ unsub: getEnabledThingIds(this.vehicles) });
         this.vehicles = vehicles;
@@ -63,6 +60,5 @@ export class PositionStore {
 
   @observable vehicles = [];
   @observable positions = [];
-  // @observable colorIndex;
   @observable selectedThingId;
 }
