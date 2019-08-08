@@ -17,12 +17,13 @@ export class PositionStore {
         checkedVehicles.forEach(
           v => v.colorIndex = this.colorIndex.get(v.groupId));
       }
+      console.log('checkedVehicles', checkedVehicles)
       const positions = await getPositions(checkedVehicles);
       this.positionIndex = new Map(positions.map((p, i) => [p.thingId, i]));
       calcOnline(positions);
       positions.forEach(p => coordinateTransform(p));
       this.positions = positions;
-      console.log(positions)
+      console.log('positions', positions)
     });
 
     if (typeof window !== 'undefined') {
