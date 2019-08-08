@@ -44,11 +44,11 @@ export class PositionStore {
       }
 
       this.setVehicles = (vehicles, colorIndex) => {
+        console.log('setVehicles', vehicles)
         this.colorIndex = colorIndex;
         socket.send({ unsub: getEnabledThingIds(this.vehicles) });
         this.vehicles = vehicles;
         socket.send({ sub: getEnabledThingIds(this.vehicles) });
-        console.log('setVehicles', vehicles)
       }
     }
   }
