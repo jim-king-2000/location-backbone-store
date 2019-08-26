@@ -15,7 +15,7 @@ export function onConnect(vehicles, socket) {
 }
 
 export function onMessage(data, index, positions) {
-  console.log(data);
+  // console.log(data);
   const i = index.get(data.thingId);
   if (i === undefined) return;
   data.data.forEach(d => {
