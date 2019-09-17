@@ -7,21 +7,19 @@ const TypeMap = new Map([
 ]);
 
 function transformPoint(p, sourceCoordinateType, targetCoordinateType) {
+  if (sourceCoordinateType === targetCoordinateType) return p;
+
   const [longitude, latitude] = transform(
     [p.longitude, p.latitude],
-    sourceCoordinateType,
+    TypeMap.get(sourceCoordinateType),
     TypeMap.get(targetCoordinateType)
   );
   p.longitude = longitude;
   p.latitude = latitude;
+  return p;
 }
 
 export function coordinateTransform(p, targetCoordinateType = 'gcj-02') {
-  if (p.coordinateType === 'wgs-84') {
-    transformPoint(p, WGS84, targetCoordinateType);
-  } else if (p.coordinateType === 'bd-09') {
-    transformPoint(p, BD09, targetCoordinateType)
-  }
-
-  return p;
+  const coordinateType = p.coordinateType || 'gcj-02';
+  return transformPoint(p, coordinateType, targetCoordinateType);
 }
