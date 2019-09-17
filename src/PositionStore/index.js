@@ -23,6 +23,7 @@ export class PositionStore {
       calcOnline(positions);
       positions.forEach(p => coordinateTransform(p, this.targetCoordinateType));
       this.positions = positions;
+      this.setFitView = true;
     });
 
     if (typeof window !== 'undefined') {
