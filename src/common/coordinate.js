@@ -1,16 +1,22 @@
 import { transform, WGS84, GCJ02, BD09 } from 'gcoord';
 
-function transformPoint(p, sourceCoordinateType, targetCoordinateType = GCJ02) {
+const TypeMap = new Map([
+  ['wgs-84', WGS84],
+  ['gcj-02', GCJ02],
+  ['bd-09', BD09]
+]);
+
+function transformPoint(p, sourceCoordinateType, targetCoordinateType) {
   const [longitude, latitude] = transform(
     [p.longitude, p.latitude],
     sourceCoordinateType,
-    targetCoordinateType
+    TypeMap.get(targetCoordinateType)
   );
   p.longitude = longitude;
   p.latitude = latitude;
 }
 
-export function coordinateTransform(p, targetCoordinateType = GCJ02) {
+export function coordinateTransform(p, targetCoordinateType = 'gcj-02') {
   if (p.coordinateType === 'wgs-84') {
     transformPoint(p, WGS84, targetCoordinateType);
   } else if (p.coordinateType === 'bd-09') {
