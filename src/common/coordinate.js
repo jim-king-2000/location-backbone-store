@@ -21,7 +21,7 @@ function transformPoint(p, sourceCoordinateType, targetCoordinateType) {
 }
 
 export function coordinateTransform(p, targetCoordinateType = 'gcj-02') {
-  const coordinateType = p.coordinateType || 'gcj-02';
+  let coordinateType = p.coordinateType || 'gcj-02';
   if (!TypeMap.get(coordinateType)) coordinateType = 'gcj-02';
   return transformPoint(p, coordinateType, targetCoordinateType);
 }
