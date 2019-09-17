@@ -20,6 +20,7 @@ function transformPoint(p, sourceCoordinateType, targetCoordinateType) {
 }
 
 export function coordinateTransform(p, targetCoordinateType = 'gcj-02') {
+  console.log(p.coordinateType)
   const coordinateType = p.coordinateType || 'gcj-02';
   return transformPoint(p, coordinateType, targetCoordinateType);
 }
