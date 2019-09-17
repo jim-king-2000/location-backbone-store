@@ -5,9 +5,10 @@ import { getEnabledThingIds, onConnect, onMessage,
   getPositions, calcOnline, refreshSelectedVehicle } from './PositionStoreUtil';
 
 export class PositionStore {
-  constructor(vehicles, colorIndex, url) {
+  constructor(vehicles, colorIndex, targetCoordinateType = 'gcj-02', url) {
     this.colorIndex = colorIndex;
     this.vehicles = vehicles;
+    this.targetCoordinateType = targetCoordinateType;
 
     autorun(async () => {
       const checkedVehicles = this.vehicles.filter(v => v.enabled);
@@ -20,7 +21,7 @@ export class PositionStore {
       const positions = await getPositions(checkedVehicles);
       this.positionIndex = new Map(positions.map((p, i) => [p.thingId, i]));
       calcOnline(positions);
-      positions.forEach(p => coordinateTransform(p));
+      positions.forEach(p => coordinateTransform(p, this.targetCoordinateType));
       this.positions = positions;
     });
 
