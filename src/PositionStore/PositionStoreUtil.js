@@ -14,7 +14,7 @@ export function onConnect(vehicles, socket) {
   console.log('Socket.io connected.');
 }
 
-export function onMessage(data, index, positions) {
+export function onMessage(data, index, positions, targetCoordinateType) {
   // console.log(data);
   const i = index.get(data.thingId);
   if (i === undefined) return;
@@ -22,7 +22,7 @@ export function onMessage(data, index, positions) {
     Object.assign(positions[i], {
       ...positions[i],
       ...d,
-      ...coordinateTransform(d.location),
+      ...coordinateTransform(d.location, targetCoordinateType),
       ...d.sensors
     });
   });

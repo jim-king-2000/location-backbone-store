@@ -35,7 +35,8 @@ export class PositionStore {
         data => onMessage(
           data,
           this.positionIndex,
-          this.positions));
+          this.positions,
+          this.targetCoordinateType));
 
       this.pickVehicle = (v, checked) => {
         v.enabled = checked;
