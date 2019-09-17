@@ -7,6 +7,7 @@ const TypeMap = new Map([
 ]);
 
 function transformPoint(p, sourceCoordinateType, targetCoordinateType) {
+  console.log(sourceCoordinateType, targetCoordinateType)
   if (sourceCoordinateType === targetCoordinateType) return p;
 
   const [longitude, latitude] = transform(
