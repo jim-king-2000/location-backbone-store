@@ -16,6 +16,7 @@ function transformPoint(p, sourceCoordinateType, targetCoordinateType) {
   );
   p.longitude = longitude;
   p.latitude = latitude;
+  p.coordinateType = targetCoordinateType;
   return p;
 }
 
