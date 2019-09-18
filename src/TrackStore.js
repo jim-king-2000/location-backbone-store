@@ -34,6 +34,7 @@ export class TrackStore {
   set = (vehicles, timeRange) => {
     this.vehicles = vehicles;
     this.timeRange = timeRange;
+    this.setFitView = true;
   }
 
   tracks = promisedComputed([], async () => getTrackSplit(
