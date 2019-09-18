@@ -36,6 +36,7 @@ export class TrackStore {
         new p.type([]),
         async () => new p.type(this.tracks.get(), this.timeRange)))
     }
+    this.targetCoordinateType = targetCoordinateType;
   }
 
   set = (vehicles, timeRange) => {
@@ -47,7 +48,7 @@ export class TrackStore {
   tracks = promisedComputed([], async () => getTrackSplit(
     this.vehicles,
     this.timeRange,
-    targetCoordinateType));
+    this.targetCoordinateType));
 
   @observable vehicles = [];
   @observable timeRange = {
