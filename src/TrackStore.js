@@ -8,6 +8,7 @@ import { coordinateTransform } from './common/coordinate';
 const tsdbClient = new TsdbClient();
 
 function transform(splittedTrack, targetCoordinateType) {
+  console.log(targetCoordinateType)
   return splittedTrack.map(
     track => track.map(
       p => coordinateTransform(p, targetCoordinateType)));
