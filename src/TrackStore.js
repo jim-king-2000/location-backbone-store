@@ -3,26 +3,33 @@ import { promisedComputed } from 'computed-async-mobx';
 import { TsdbClient } from 'location-backbone-sdk';
 import { appId, authorization } from './account';
 import { toTimestamp, today } from './common/utils';
+import { coordinateTransform } from './common/coordinate';
 
 const tsdbClient = new TsdbClient();
 
-async function getTrackSplit(vehicles, timeRange) {
+function transform(splittedTrack, targetCoordinateType) {
+  return splittedTrack.map(
+    track => track.map(
+      p => coordinateTransform(p, targetCoordinateType)));
+}
+
+async function getTrackSplit(vehicles, timeRange, targetCoordinateType) {
   const vehiclesEnabled = vehicles.filter(v => v.enabled);
   return Promise.all(vehiclesEnabled.map(async (v, i) => ({
     ...v,
     colorIndex: i,
-    splittedTrack: await tsdbClient.getTrackSplit({
+    splittedTrack: transform(await tsdbClient.getTrackSplit({
       appId,
       thingId: v.thingId,
       authorization,
       start: toTimestamp(timeRange.startTime),
       end: toTimestamp(timeRange.endTime)
-    })
+    }))
   })));
 }
 
 export class TrackStore {
-  constructor(vehicles, properties) {
+  constructor(vehicles, properties, targetCoordinateType = 'gcj-02') {
     this.vehicles = vehicles;
     if (Array.isArray(properties)) {
       properties.forEach(p => this[p.name] = promisedComputed(
@@ -39,7 +46,8 @@ export class TrackStore {
 
   tracks = promisedComputed([], async () => getTrackSplit(
     this.vehicles,
-    this.timeRange));
+    this.timeRange,
+    targetCoordinateType));
 
   @observable vehicles = [];
   @observable timeRange = {
