@@ -24,7 +24,7 @@ async function getTrackSplit(vehicles, timeRange, targetCoordinateType) {
       authorization,
       start: toTimestamp(timeRange.startTime),
       end: toTimestamp(timeRange.endTime)
-    }))
+    }), targetCoordinateType)
   })));
 }
 
