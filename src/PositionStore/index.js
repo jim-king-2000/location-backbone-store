@@ -12,6 +12,8 @@ export class PositionStore {
 
     autorun(async () => {
       console.log('autorun begin')
+      this.setFitView = true;
+      console.log('autorun', this.setFitView)
       const checkedVehicles = this.vehicles.filter(v => v.enabled);
       if (!this.colorIndex) {
         checkedVehicles.forEach((v, i) => v.colorIndex = i);
@@ -24,8 +26,6 @@ export class PositionStore {
       calcOnline(positions);
       positions.forEach(p => coordinateTransform(p, this.targetCoordinateType));
       this.positions = positions;
-      this.setFitView = true;
-      console.log('autorun', this.setFitView)
     });
 
     if (typeof window !== 'undefined') {
