@@ -11,7 +11,7 @@ export class PositionStore {
     this.targetCoordinateType = targetCoordinateType;
 
     autorun(async () => {
-      console.log('autorun')
+      console.log('autorun begin')
       const checkedVehicles = this.vehicles.filter(v => v.enabled);
       if (!this.colorIndex) {
         checkedVehicles.forEach((v, i) => v.colorIndex = i);
@@ -25,7 +25,7 @@ export class PositionStore {
       positions.forEach(p => coordinateTransform(p, this.targetCoordinateType));
       this.positions = positions;
       this.setFitView = true;
-      console.log(this.setFitView)
+      console.log('autorun', this.setFitView)
     });
 
     if (typeof window !== 'undefined') {
