@@ -11,9 +11,7 @@ export class PositionStore {
     this.targetCoordinateType = targetCoordinateType;
 
     autorun(async () => {
-      console.log('autorun begin')
       this.setFitView = true;
-      console.log('autorun', this.setFitView)
       const checkedVehicles = this.vehicles.filter(v => v.enabled);
       if (!this.colorIndex) {
         checkedVehicles.forEach((v, i) => v.colorIndex = i);
