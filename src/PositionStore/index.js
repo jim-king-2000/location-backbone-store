@@ -14,7 +14,7 @@ export class PositionStore {
       this.setFitView = true;
       const checkedVehicles = this.vehicles.filter(v => v.enabled);
       if (!this.colorIndex) {
-        checkedVehicles.forEach((v, i) => v.colorIndex = i);
+        this.vehicles.forEach((v, i) => v.colorIndex = i);
       } else {
         checkedVehicles.forEach(
           v => v.colorIndex = this.colorIndex.get(v.groupId));
