@@ -15,16 +15,19 @@ function transform(splittedTrack, targetCoordinateType) {
 
 async function getTrackSplit(vehicles, timeRange, targetCoordinateType) {
   const vehiclesEnabled = vehicles.filter(v => v.enabled);
+  const start = toTimestamp(timeRange.startTime);
+  const end = toTimestamp(timeRange.endTime);
   return Promise.all(vehiclesEnabled.map(async (v, i) => ({
-    timeRange,
+    start,
+    end,
     ...v,
     colorIndex: i,
     splittedTrack: transform(await tsdbClient.getTrackSplit({
       appId,
       thingId: v.thingId,
       authorization,
-      start: toTimestamp(timeRange.startTime),
-      end: toTimestamp(timeRange.endTime)
+      start,
+      end,
     }), targetCoordinateType)
   })));
 }
