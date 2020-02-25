@@ -17,12 +17,6 @@
     "url": "https://github.com/jim-king-2000/LocationBackboneStore/issues"
   },
   "homepage": "https://github.com/jim-king-2000/LocationBackboneStore#readme",
-  "peerDependencies": {
-    "computed-async-mobx": "^4.1.1",
-    "array.prototype.flat": "^1.2.1",
-    "mobx": "^5.10.1",
-    "socket.io-client": "^2.2.0"
-  },
   "dependencies": {
     "gcoord": "^0.2.3"
   }
